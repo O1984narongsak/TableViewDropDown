@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ExpandableHeaderViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var oConstaint_H : NSLayoutConstraint!
     
     var sections = [
         Section(genre: "🦁 Animation",
@@ -20,13 +21,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 movies: ["Guardians of the Galaxy", "The Flash", "The Avengers", "The Dark Knight"],
                 expanded: false),
         Section(genre: "👻 Horror",
-                movies: ["The Walking Dead", "Insidious", "Conjuring"],
+                movies: ["The Walking Dead", "Insidious", "Conjuring","The Walking Dead", "Insidious", "Conjuring","The Walking Dead", "Insidious", "Conjuring","The Walking Dead", "Insidious", "Conjuring"],
                 expanded: false)
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.reloadData()
+        tableView.layoutIfNeeded()
+        oConstaint_H.constant = tableView.contentSize.height
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,6 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
         }
         tableView.endUpdates()
+        oConstaint_H.constant = tableView.contentSize.height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
